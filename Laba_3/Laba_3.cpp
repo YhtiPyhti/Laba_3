@@ -90,7 +90,20 @@ void zad_6() {
 }
 
 void zad_7() {
-
+	int x = 2, r = 3, r1 = 2, t0 = x % 10 , t = x % 10;
+	if (t == 0) cout << "0";
+	else if (t == 1) cout << "1";
+	else if (t == 5) cout << "5";
+	else if (t == 6) cout << "6";
+	else {
+		for (int i = 1; i <= r; i++) {
+			for (int j = 1; j <= r1; j++) {
+				t = x % 10;
+				x = t * t0;
+			}
+		}
+		cout << t;
+	}
 }
 
 int main(){
