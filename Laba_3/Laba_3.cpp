@@ -58,7 +58,38 @@ void zad_4() {
 	}
 }
 
-int zad_5() {
+int mod(int g, int X ,int p) {
+	int t = 0, t0 = g % p;
+	for (int i = 1; i <= X; i++) {
+		t = g % p;
+		g = t * t0;
+	}
+	return t;
+}
+
+
+void zad_5() {
+	int g = 5, p = 23, Xa = 4, Xb = 11, Ya = 0, Yb = 0 , k = 7, r = 0, e = 0, m = 10 , m1 = 0 , t=0;
+	Ya = mod(g, Xa, p);
+	Yb = mod(g, Xb, p);
+	cout << "Абонент A" << " Секретный ключ - " << Xa << " Открытый ключ - " << Ya << endl;
+	cout << "Абонент B" << " Секретный ключ - " << Xb << " Открытый ключ - " << Yb << endl;
+	r = mod(g, k, p);
+	t = mod(Yb, k, p);
+	e = ((m % p) * t) % p;
+	g = p - 1 - Xb;
+	t = mod(r, g, p);
+	m1 = ((e % p) * t) % p;
+
+	cout << m << endl;
+	cout << m1 << endl;
+}
+
+void zad_6() {
+
+}
+
+void zad_7() {
 
 }
 
@@ -68,6 +99,7 @@ int main(){
 	//zad_2();
 	//zad_3();
 	//zad_4();
-	zad_5();
-
+	//zad_5();
+	//zad_6();
+	zad_7();
 }
