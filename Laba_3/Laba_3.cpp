@@ -81,8 +81,9 @@ void zad_5() {
 	t = mod(r, g, p);
 	m1 = ((e % p) * t) % p;
 
-	cout << m << endl;
-	cout << m1 << endl;
+	cout << "Исходный текст:" << m << endl;
+	cout << "Зашифрованный текст:" << e << endl;
+	cout << "Расшифрованный текст:" << m1 << endl;
 }
 
 void zad_6() {
