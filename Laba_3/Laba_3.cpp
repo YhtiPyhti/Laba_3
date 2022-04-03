@@ -82,7 +82,7 @@ void zad_5() {
 	m1 = ((e % p) * t) % p;
 
 	cout << "Исходный текст:" << m << endl;
-	cout << "Зашифрованный текст:" << e << endl;
+	cout << "Зашифрованный текст:" << r << ", " << e << endl;
 	cout << "Расшифрованный текст:" << m1 << endl;
 }
 
@@ -91,19 +91,24 @@ void zad_6() {
 }
 
 void zad_7() {
-	int x = 2, r = 3, r1 = 2, t0 = x % 10 , t = x % 10;
-	if (t == 0) cout << "0";
-	else if (t == 1) cout << "1";
-	else if (t == 5) cout << "5";
-	else if (t == 6) cout << "6";
+	int x = 13, r = 4, r1 = 3, t = x % 10, t2 = r % 4 , Num = 0, Num_st = 0; //mod 4
+	if (t == 0) cout << "Последняя цифра: 0";
+	else if (t == 1) cout << "Последняя цифра: 1";
+	else if (t == 5) cout << "Последняя цифра: 5";
+	else if (t == 6) cout << "Последняя цифра: 6";
 	else {
-		for (int i = 1; i <= r; i++) {
-			for (int j = 1; j <= r1; j++) {
-				t = x % 10;
-				x = t * t0;
-			}
+		for (int i = 1; i <= r1; i++) {
+			Num_st = (r % 4);
+			r = t2 * Num_st;
 		}
-		cout << t;
+		if(Num_st == 0) cout << "Последняя цифра степени: 1";
+		else {
+			for (int j = 1; j <= Num_st; j++) {
+				Num = (x % 10);
+				x = t * Num;
+			}
+			cout << "Последняя цифра степени: " << Num;
+		}
 	}
 }
 
@@ -115,5 +120,5 @@ int main(){
 	//zad_4();
 	//zad_5();
 	//zad_6();
-	zad_7();
+	//zad_7();
 }
