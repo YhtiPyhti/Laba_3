@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <vector>
 using namespace std;
 
 void zad_1() {
@@ -87,7 +88,24 @@ void zad_5() {
 }
 
 void zad_6() {
+	int n = 500;
+	vector<int> v(n+1);
+	for (size_t i = 0; i < n + 1; i++) {
+		v[i] = i;
+	}
 
+	v[0] = v[1] = 0;
+	for (int i = 2; i <= n; ++i) {
+		if (v[i]) {
+			if (i * 1ll * i <= n) { // long long
+				for (int j = i * i; j <= n; j += i)
+					v[j] = 0;
+			}
+		}
+	}
+	for (auto i : v){
+		if (i != 0) cout << i << " ";
+	}
 }
 
 void zad_7() {
