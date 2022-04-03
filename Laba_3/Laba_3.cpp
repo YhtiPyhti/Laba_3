@@ -3,6 +3,7 @@
 using namespace std;
 
 void zad_1() {
+
 	for (double x = -5; x < 5; x++)
 	{
 		if (x <= -2) {
@@ -34,6 +35,7 @@ void zad_2() {
 	}
 	else cout << "Теорема Ферма не работает";
 }
+
 void zad_3() {
 	int b = 1234, a = 54;
 	while (b != 0) {
@@ -110,22 +112,22 @@ void zad_6() {
 
 void zad_7() {
 	int x = 13, r = 4, r1 = 3, t = x % 10, t2 = r % 4 , Num = 0, Num_st = 0; //mod 4
-	if (t == 0) cout << "Последняя цифра: 0";
-	else if (t == 1) cout << "Последняя цифра: 1";
-	else if (t == 5) cout << "Последняя цифра: 5";
-	else if (t == 6) cout << "Последняя цифра: 6";
+	if (t == 0) cout << "Последняя цифра числа: 0";
+	else if (t == 1) cout << "Последняя цифра числа: 1";
+	else if (t == 5) cout << "Последняя цифра числа: 5";
+	else if (t == 6) cout << "Последняя цифра числа: 6";
 	else {
 		for (int i = 1; i <= r1; i++) {
 			Num_st = (r % 4);
 			r = t2 * Num_st;
 		}
-		if(Num_st == 0) cout << "Последняя цифра степени: 1";
+		if(Num_st == 0) cout << "Последняя цифра числа: 1";
 		else {
 			for (int j = 1; j <= Num_st; j++) {
 				Num = (x % 10);
 				x = t * Num;
 			}
-			cout << "Последняя цифра степени: " << Num;
+			cout << "Последняя цифра числа: " << Num;
 		}
 	}
 }
