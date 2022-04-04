@@ -1,4 +1,6 @@
 ﻿#include <iostream>
+#include <random>
+#include <ctime>
 #include <vector>
 using namespace std;
 
@@ -20,20 +22,29 @@ void zad_1() {
 
 bool Pros(int a, int p){
 	int t = 0;
-	for (int i = 2; i < sqrt(a) || i < sqrt(p); i++) {
-		if (a % i == 0 || p % i == 0) t = 1 ;
+	for (int j = 2; j < sqrt(a); j++) {
+		if (a % j == 0 ) t = 1 ;
+	}
+	for (int j = 2; j < sqrt(p); j++) {
+		if (p % j == 0) t = 1;
 	}
 	if (t == 1) return false;
 	else return true;
 }
 
 void zad_2() {
-	int a = 6, x = 12, p = 13, q = 0;
-	if (p - 1 == x && Pros(a, p)) {
+	int a = 3, x = 12, p = 13, q = 0;
+	int t = 0, t0 = a % p;
+	if (p - 1 == x && Pros(a, p) == true) {
 		q = 1 % p;
+		cout << "Теорема Ферма работает ";
 		cout << q;
 	}
-	else cout << "Теорема Ферма не работает";
+	for (int i = 1; i <= x; i++) {
+		t = a % p;
+		a = t * t0;
+	}
+	cout << t;
 }
 
 void zad_3() {
@@ -89,29 +100,79 @@ void zad_5() {
 	cout << "Расшифрованный текст:" << m1 << endl;
 }
 
+int Test_Mil(int n, int &t) {
+	cout << endl;
+	int div = 2, g = n - 1;
+	vector <int> kan;
+	vector <int> num;
+
+	mt19937 gen(time(0));
+	uniform_int_distribution <int> uid1(2, n-1);
+
+	while (g > 1) {
+		while (g % div == 0) {
+			kan.push_back(div);
+			g /= div;
+		}
+		div++;
+	}
+
+	for (int i = 0; i < t ; i++) {
+		num.push_back(uid1(gen));
+	}
+
+	for (auto a : num) {
+		if (mod(a, n - 1, n) == 1) {
+			cout << "n – составное число" << endl;
+			return n;
+		}
+	}
+
+	for (auto a : num) {
+		for (auto q : kan) {
+			if (mod(a, (n - 1) / q , n) != 1) {
+				continue;
+			}
+		}
+	}
+
+	cout << "n – простое число" << endl;
+	return n;
+}
+
 void zad_6() {
-	int n = 500;
-	vector<int> v(n+1);
-	for (size_t i = 0; i < n + 1; i++) {
+	//1
+	int N = 500;
+	vector<int> v(N+1);
+	for (size_t i = 0; i < N + 1; i++) {
 		v[i] = i;
 	}
 
 	v[0] = v[1] = 0;
-	for (int i = 2; i <= n; ++i) {
+	for (int i = 2; i <=N; ++i) {
 		if (v[i]) {
-			if (i * 1ll * i <= n) { // long long
-				for (int j = i * i; j <= n; j += i)
+			if (i * 1ll * i <= N) { // long long
+				for (int j = i * i; j <= N; j += i)
 					v[j] = 0;
 			}
 		}
 	}
+	v.erase(remove(v.begin(), v.end(), 0), v.end());
 	for (auto i : v){
-		if (i != 0) cout << i << " ";
+		cout << i << " ";
 	}
+
+	//1 a
+	int r = 59, m = 0, n = 0, i = 1, t = 4;
+	n = Test_Mil(r,t);
+
+	cout << n;
+
+
 }
 
 void zad_7() {
-	int x = 13, r = 4, r1 = 3, t = x % 10, t2 = r % 4 , Num = 0, Num_st = 0; //mod 4
+	int x = 3, r = 7, r1 = 8, t = x % 10, t2 = r % 4 , Num = 0, Num_st = 0; //mod 4
 	if (t == 0) cout << "Последняя цифра числа: 0";
 	else if (t == 1) cout << "Последняя цифра числа: 1";
 	else if (t == 5) cout << "Последняя цифра числа: 5";
@@ -135,7 +196,7 @@ void zad_7() {
 int main(){
 	setlocale(LC_ALL, "Russian");
     //zad_1();
-	//zad_2();
+	zad_2();
 	//zad_3();
 	//zad_4();
 	//zad_5();
