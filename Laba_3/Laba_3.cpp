@@ -101,8 +101,8 @@ void zad_5() {
 }
 
 int Test_Mil(int n, int &t) {
-	cout << endl;
 	int div = 2, g = n - 1;
+
 	vector <int> kan;
 	vector <int> num;
 
@@ -140,6 +140,67 @@ int Test_Mil(int n, int &t) {
 	return n;
 }
 
+
+int Test_Pol(int n, int &t) {
+	int div = 2, g = n - 1;
+
+	vector <int> kan;
+	vector <int> num;
+
+	mt19937 gen(time(0));
+	uniform_int_distribution <int> uid1(2, n - 1);
+
+	while (g > 1) {
+		while (g % div == 0) {
+			kan.push_back(div);
+			g /= div;
+		}
+		div++;
+	}
+
+	for (int i = 0; i < t; i++) {
+		num.push_back(uid1(gen));
+	}
+
+	for (auto a : num) {
+		if (mod(a, n - 1, n) == 1) {
+			cout << "n – составное число" << endl;
+			return n;
+		}
+	}
+
+	for (auto a : num) {
+		for (auto q : kan) {
+			if (mod(a, (n - 1) / q, n) != 1) {
+				continue;
+			}
+		}
+	}
+
+	cout << "n – простое число" << endl;
+	return n;
+}
+
+
+int Gost(int &t, int q) {
+	float e = 0.1;
+	float p = pow(2,t+1), N = 1, u = 0;
+
+	while (p > pow(2, t)){
+		N = pow(2, t - 1) / q;
+		N += N * e;
+		if (fmod(N, 2) != 0) N += 1;
+		N = round(N);
+		p = (N + u) * q + 1;
+
+		if (mod(2, p - 1, p) == mod(1, 1, p) && mod(2, N + u, p) != mod(1, 1, p)) {
+			cout << "n – простое число" << endl;
+			return p;
+		}
+		u += 2;
+	}
+}
+
 void zad_6() {
 	//1
 	int N = 500;
@@ -161,14 +222,76 @@ void zad_6() {
 	for (auto i : v){
 		cout << i << " ";
 	}
+	cout << endl;
 
-	//1 a
-	int r = 59, m = 0, n = 0, i = 1, t = 4;
-	n = Test_Mil(r,t);
+	//2
+	int r = 0, m = 0, n = 0, t = 4;
 
-	cout << n;
+	m = v[2] * v[7] * v[4];
+	n = 2 * m + 1;
 
+	r = Test_Mil(n,t);
+	cout << r << endl;
 
+	int F = v[2] * v[7] * v[1];
+	int R = F - 1;
+	n = R * F + 1;
+
+	r = Test_Pol(n, t);
+	cout << r << endl;
+
+	int q = 3;
+	R = 4 * (q + 1) - 2;
+	n = q * R + 1;
+
+	r = Gost(t, 3);
+	cout << r << endl;
+
+	m = v[2] * v[10] * v[4];
+	n = 2 * m + 1;
+	r = Test_Mil(n, t);
+	cout << r << endl;
+
+	F = v[1] * v[0] * v[15];
+	R = F - 1;
+	n = R * F + 1;
+	r = Test_Pol(n, t);
+	cout << r << endl;
+
+	q = 2;
+	R = 4 * (q + 1) - 2;
+	n = q * R + 1;
+	r = Gost(t, q);
+	cout << r << endl;
+
+	m = v[2] * v[1] * v[5];
+	n = 2 * m + 1;
+	r = Test_Mil(n, t);
+	cout << r << endl;
+
+	F = v[7] * v[8] * v[1];
+	R = F - 1;
+	n = R * F + 1;
+	r = Test_Pol(n, t);
+	cout << r << endl;
+
+	q = 2;
+	R = 4 * (q + 1) - 7;
+	n = q * R + 1;
+	r = Gost(t, q);
+	cout << r << endl;
+
+	F = v[3] * v[7] * v[5];
+	R = F - 1;
+	n = R * F + 1;
+	r = Test_Pol(n, t);
+	cout << r << endl;
+
+	//3
+
+	//4
+
+	//5
 }
 
 void zad_7() {
@@ -196,10 +319,10 @@ void zad_7() {
 int main(){
 	setlocale(LC_ALL, "Russian");
     //zad_1();
-	zad_2();
+	//zad_2();
 	//zad_3();
 	//zad_4();
 	//zad_5();
-	//zad_6();
+	zad_6();
 	//zad_7();
 }
