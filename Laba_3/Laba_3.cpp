@@ -203,22 +203,33 @@ int Gost(int &t, int q) {
 
 void zad_6() {
 	//1
-	int N = 500;
+	int j = 0, N = 500, k = 0;
+	vector<int> pros;
+	vector<int> otv;
 	vector<int> v(N+1);
 	for (size_t i = 0; i < N + 1; i++) {
 		v[i] = i;
 	}
 
 	v[0] = v[1] = 0;
-	for (int i = 2; i <=N; ++i) {
+
+	for (int i = 2; i <= N; ++i) {
 		if (v[i]) {
 			if (i * 1ll * i <= N) { // long long
-				for (int j = i * i; j <= N; j += i)
+				for (j = i * i; j <= N; j += i)
 					v[j] = 0;
 			}
 		}
 	}
+
+	for (int i = 2; i <= N; ++i) {
+		if (v[i] == 0) {
+			otv.push_back(i);
+		}
+	}
+
 	v.erase(remove(v.begin(), v.end(), 0), v.end());
+
 	for (auto i : v){
 		cout << i << " ";
 	}
@@ -231,67 +242,90 @@ void zad_6() {
 	n = 2 * m + 1;
 
 	r = Test_Mil(n,t);
-	cout << r << endl;
+	pros.push_back(r);
 
 	int F = v[2] * v[7] * v[1];
 	int R = F - 1;
 	n = R * F + 1;
 
 	r = Test_Pol(n, t);
-	cout << r << endl;
+	pros.push_back(r);
 
 	int q = 3;
 	R = 4 * (q + 1) - 2;
 	n = q * R + 1;
 
 	r = Gost(t, 3);
-	cout << r << endl;
+	pros.push_back(r);
 
 	m = v[2] * v[10] * v[4];
 	n = 2 * m + 1;
 	r = Test_Mil(n, t);
-	cout << r << endl;
+	pros.push_back(r);
 
 	F = v[1] * v[0] * v[15];
 	R = F - 1;
 	n = R * F + 1;
 	r = Test_Pol(n, t);
-	cout << r << endl;
+	pros.push_back(r);
 
 	q = 2;
 	R = 4 * (q + 1) - 2;
 	n = q * R + 1;
 	r = Gost(t, q);
-	cout << r << endl;
+	pros.push_back(r);
 
 	m = v[2] * v[1] * v[5];
 	n = 2 * m + 1;
 	r = Test_Mil(n, t);
-	cout << r << endl;
+	pros.push_back(r);
 
 	F = v[7] * v[8] * v[1];
 	R = F - 1;
 	n = R * F + 1;
 	r = Test_Pol(n, t);
-	cout << r << endl;
+	pros.push_back(r);
 
-	q = 2;
-	R = 4 * (q + 1) - 7;
+	q = 3;
+	R = 4 * (q + 1) - 6;
 	n = q * R + 1;
 	r = Gost(t, q);
-	cout << r << endl;
+	pros.push_back(r);
 
 	F = v[3] * v[7] * v[5];
 	R = F - 1;
 	n = R * F + 1;
 	r = Test_Pol(n, t);
-	cout << r << endl;
+	pros.push_back(r);
+
+	for (auto i : pros) {
+		cout << i << " ";
+	}
+	cout << endl;
 
 	//3
-
+	for (auto i : pros) {
+		if (mod(i, 26, 13) == 1) {
+			cout << "Yes " << i << endl;
+		}
+	}
 	//4
+	for (auto i : otv) {
+		if (mod(i, 26, 13) == 1) {
+			k += 1;
+		}
+	}
 
+	cout << "K = " << k << endl;
 	//5
+
+	for (int i = 0; i < 10; i++) {
+		cout << "  Номер эксперимента " << i+1 << " ";
+		cout << pros[i];
+		if (mod(pros[i], 26, 13) == 1) cout << "  Результат проверки вероятностным тестом +  ";
+		else cout << "  Результат проверки вероятностным тестом - ";
+		cout << k << endl;;
+	}
 }
 
 void zad_7() {
